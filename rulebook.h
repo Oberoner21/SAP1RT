@@ -23,14 +23,14 @@
 #define     RULE_ADD        400
 #define     RULE_SUB        500
 #define     RULE_STA        600
-#define     RULE_LDI        700
+#define     RULE_LDI        1000
 #define     RULE_JMP        750
 #define     RULE_JC         800
 #define     RULE_JZ         850
 #define     RULE_OUT        900
 #define     RULE_HLT        950
-#define     RULE_END        1022
-#define     RULE_ERROR      1023
+#define     RULE_END        4094
+#define     RULE_ERROR      4095
 
 // Register positions
 #define     FZ              2
@@ -78,6 +78,7 @@ void SetRule(uint16_t rule, uint8_t readSymbol, uint8_t writeSymbol, uint8_t nex
 #include "rule_fetch.h"
 #include "rule_decode.h"
 #include "rule_ldi.h"
+#include "rule_sta.h"
 
 void GenerateRuleBook()
 {
@@ -97,5 +98,6 @@ void GenerateRuleBook()
     GenerateRuleFETCH(RULE_FETCH);
     GenerateRuleDECODE(RULE_DECODE);
     GenerateRuleLDI(RULE_LDI);
+    GenerateRuleSTA(RULE_STA);
 }
 
