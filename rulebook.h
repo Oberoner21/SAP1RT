@@ -18,16 +18,16 @@
 #define     RULE_FETCH      20
 #define     RULE_DECODE     150
 #define     RULE_NOP        200
-#define     RULE_LDA        250
-#define     RULE_ALU        350
-#define     RULE_ADD        400
+#define     RULE_LDA        3000
+#define     RULE_ALU        1800
+#define     RULE_ADD        1500
 #define     RULE_SUB        500
 #define     RULE_STA        600
 #define     RULE_LDI        1000
-#define     RULE_JMP        750
-#define     RULE_JC         800
+#define     RULE_JMP        3500
+#define     RULE_JC         2000
 #define     RULE_JZ         850
-#define     RULE_OUT        900
+#define     RULE_OUT        2500
 #define     RULE_HLT        950
 #define     RULE_END        4094
 #define     RULE_ERROR      4095
@@ -56,7 +56,7 @@ void ResetControlLines(){
     controlLines = 0;
 }
 
-void SetSerOUTCLK(uint8_t value){
+void SetOUTCLK(uint8_t value){
 
     if(value == HIGH) controlLines = controlLines | 0x01;
     else controlLines = controlLines & 0xFE;
@@ -79,6 +79,12 @@ void SetRule(uint16_t rule, uint8_t readSymbol, uint8_t writeSymbol, uint8_t nex
 #include "rule_decode.h"
 #include "rule_ldi.h"
 #include "rule_sta.h"
+#include "rule_add.h"
+#include "rule_alu.h"
+#include "rule_jc.h"
+#include "rule_out.h"
+#include "rule_lda.h"
+#include "rule_jmp.h"
 
 void GenerateRuleBook()
 {
@@ -99,5 +105,11 @@ void GenerateRuleBook()
     GenerateRuleDECODE(RULE_DECODE);
     GenerateRuleLDI(RULE_LDI);
     GenerateRuleSTA(RULE_STA);
+    GenerateRuleADD(RULE_ADD);
+    GenerateRuleALU(RULE_ALU);
+    GenerateRuleJC(RULE_JC);
+    GenerateRuleOUT(RULE_OUT);
+    GenerateRuleLDA(RULE_LDA);
+    GenerateRuleJMP(RULE_JMP);
 }
 

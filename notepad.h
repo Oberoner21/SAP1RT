@@ -34,7 +34,6 @@ uint8_t Program[16] = {
 	0x00
 };
 
-
 const char SAP1_REGISTERS[] = (
 
     // ZC A/B              PC       IR   MAR

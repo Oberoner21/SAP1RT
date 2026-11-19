@@ -191,6 +191,6 @@ void GenerateRuleFETCH(uint16_t rule)
 
     // Sek to I3 and go to RULE_DECODE
     SetRule(rule, '0', '0', IR -3, RULE_DECODE);
-    SetRule(rule, '0', '0', IR -3, RULE_DECODE);
+    SetRule(rule, '1', '1', IR -3, RULE_DECODE);
     rule++; 
 }

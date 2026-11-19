@@ -2,6 +2,7 @@
 #include <thread>
 #include <chrono>
 #include "symbols.h"
+#include "utils.h"
 #include "rulebook.h"
 #include "notepad.h"
 
@@ -40,7 +41,7 @@ int main() {
 
         cykles++;
 
-        if(nextRule == RULE_END) {
+        if(nextRule == RULE_END | nextRule == RULE_HLT) {
 
             std::cout << std::endl;
             std::cout << "END State   Cykle: " << static_cast<int>(cykles) << std::endl;
@@ -129,6 +130,26 @@ int main() {
             
             halt = true;
 
+        }
+
+        if(rule == RULE_OUT) {
+
+            uint8_t outVal = 0;
+            if(notePad[19] == 1) outVal |= 0x01;
+            if(notePad[17] == 1) outVal |= 0x02;
+            if(notePad[15] == 1) outVal |= 0x04;
+            if(notePad[13] == 1) outVal |= 0x08;
+            if(notePad[11] == 1) outVal |= 0x10;
+            if(notePad[9] == 1) outVal |= 0x20;
+            if(notePad[7] == 1) outVal |= 0x40;
+            if(notePad[5] == 1) outVal |= 0x80;
+
+            std::cout << "Cykles: " << static_cast<int>(cykles - cyklesBefore) << 
+                "  Out: " << static_cast<int>(outVal) << ::endl;
+            cyklesBefore = cykles;
+
+            // Delay
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         }
 
         // Delay
